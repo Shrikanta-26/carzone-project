@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
+# import environ
+# env = environ.Env()
+# environ.Env.read_env()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,17 +36,51 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'pages',
+    'cars',
+    'ckeditor',
+    'accounts',
+    'contacts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pages',
-    'cars',
-    'ckeditor',
     'django.contrib.humanize',
+    'django.contrib.sites',
+    'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+  
+
+    #providers
+    # 'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.google',
+
 ]
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'APP': {
+#             'client_id': env('OAUTH_GOOGLE_CLIENT_ID'),
+#             'secret': env('OAUTH_GOOGLE_CLIENT_SECRET'),
+#         },
+#     },
+#     'facebook':{
+#         'APP': {
+#             'client_id': env('OAUTH_GOOGLE_CLIENT_ID'),
+#             'secret': env('OAUTH_GOOGLE_CLIENT_SECRET'),
+#         },
+#         'AUTH_PARAMS':{
+#             'auth_type':'reauthenticate',
+#         },
+#     },
+# }
+
+
+SITE_ID = 1
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +88,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -137,3 +177,21 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+#messages
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: "danger",  
+}
+
+LOGIN_REDIRECT_URL = 'dashboard'
+# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+#Email Config
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'shrikantadutta108@gmail.com'
+EMAIL_HOST_PASSWORD = 'jhsl utbg fppg pugl'
+EMAIL_USE_TLS = True

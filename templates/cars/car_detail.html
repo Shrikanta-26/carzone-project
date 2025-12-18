@@ -28,15 +28,15 @@
                 <div class="car-details-section">
                     <!-- Heading start -->
                     <div class="heading-car clearfix">
-                      {% comment %} {% include 'includes/messages.html' %} {% endcomment %}
+                      {% include 'includes/messages.html' %}
                         <div class="pull-left">
                             <h3>{{single_car.car_title}}</h3>
                             <h6>
-                                <i class="flaticon-pin"></i>{{single_car.state}}, {{single_car.city}}
+                                <i class="flaticon-pin"></i>{{single_car.city}}
                             </h6>
                         </div>
                         <div class="pull-right">
-                            <h3><span>$ {{single_car.price | intcomma}}</span></h3>
+                            <h3><span> ৳ {{single_car.price | intcomma}}</span></h3>
                         </div>
                     </div>
                     <div id="carDetailsSlider" class="carousel car-details-sliders slide mb-40">
@@ -155,7 +155,7 @@
                 <div class="sidebar-right">
                     <!-- Advanced search start -->
                     <div class="widget advanced-search d-none-992">
-                        <button class="btn btn-outline-danger bomd btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Send message</button>
+                        <button class="btn btn-outline-danger bomd btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Send Message</button>
 
 
                         <br>
@@ -222,7 +222,7 @@
                             </button>
                           </div>
                           <div class="modal-body">
-                            <form action="" method="POST">
+                            <form action="{% url "inquiry" %}" method="POST">
                               {% csrf_token %}
 
                               {% if user.is_authenticated %}
@@ -264,9 +264,7 @@
                                     <div class="col">
                                       <input type="text" name="city" class="form-control" placeholder="City" required>
                                     </div>
-                                    <div class="col">
-                                      <input type="text" name="state" class="form-control" placeholder="State" required>
-                                    </div>
+                                   
                                   </div>
                                 </div>
 
